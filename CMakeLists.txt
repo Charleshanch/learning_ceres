@@ -9,9 +9,13 @@ add_compile_options(-std=c++17)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED)
 
+find_package(Ceres REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+set(DEP_LIBRARIES
+  ${CERES_LIBRARIES}
+)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -114,6 +118,7 @@ catkin_package(
 include_directories(
 # include
 # ${catkin_INCLUDE_DIRS}
+  ${CERES_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -133,6 +138,7 @@ add_executable(learn_ceres src/learn_ceres.cpp)
 add_dependencies(learn_ceres ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(learn_ceres
   ${catkin_LIBRARIES}
+  ${DEP_LIBRARIES}
 )
 
 ## Rename C++ executable without prefix
